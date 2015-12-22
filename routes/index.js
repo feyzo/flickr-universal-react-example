@@ -1,9 +1,15 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+const getFlickrImages = require('../helpers/flickr');
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+router.get('/', function(req, res) {
+  res.renderFile('../public/index.html');
+});
+
+router.get('/api/flickr', function(req, res) {
+  //Send flickr response as api response without parsing
+  getFlickrImages().pipe(res);
 });
 
 module.exports = router;
