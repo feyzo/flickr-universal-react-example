@@ -9,7 +9,9 @@ router.get('/', function(req, res) {
 
 router.get('/api/flickr', function(req, res) {
   //Send flickr response as api response without parsing
+  
   getFlickrImages().pipe(res);
+  // res.type('json');
 });
 
 module.exports = router;
