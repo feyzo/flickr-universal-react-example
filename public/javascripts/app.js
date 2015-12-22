@@ -6,7 +6,6 @@ const reqwest = require('reqwest');
 
 const Photo = require('./Photo');
 
-var testArr = [1, 2, 3, 4, 5];
 
 var App = React.createClass({
   getInitialState : function () {
@@ -54,11 +53,6 @@ var App = React.createClass({
     return (
       <div>
         {appContent}
-        <ul>
-        {
-          testArr.map(i => <li key={i}>{i}</li>)
-        }
-        </ul>
       </div>
     );
   }

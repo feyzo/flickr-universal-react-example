@@ -3,47 +3,68 @@ const React = require('react');
 
 
 module.exports = React.createClass({
-  render: function() {
+
+  renderAuthor: function (dirtyAuthor, authorId) {
     //Defined here instead of globally
     //Becase regex is stateful
     //http://stackoverflow.com/a/11477448/1744033
     const regexBetweenParantheses = /\(([^)]+)\)/ig;
+    let author = regexBetweenParantheses.exec(dirtyAuthor)[1];
+    let authorLink = 'https://www.flickr.com/people/' + authorId;
+    
+    return (
+      <a href={authorLink} target="_blank">
+        <small>{author}</small>
+      </a>
+    );
+  },
+
+  renderDesc: function (dirtyDesc) {
     const regexBetweenParagraphs = /<p>(.*?)<\/p>/ig;
 
-    const photo = this.props.photo;
-    
-    let author = regexBetweenParantheses.exec(photo.author)[1];
-    
-    let desc = 'No details';
+    let descContent = <div><p>No details</p></div>;
+
     //Group paragraphs
-    //let descItems = photo.description.match(/<p>(.*?)<\/p>/gi);
-    let descItems = regexBetweenParagraphs.exec(photo.description);
+    let descItems = dirtyDesc.match(regexBetweenParagraphs);
     //3rd paragraph is the description.
     //Unfortunately flickr sends a lot of crud
+
     if (descItems.length > 2) {
-      desc = descItems[2];
+      let desc = descItems[2];
+      descContent = <div dangerouslySetInnerHTML={{__html: desc}}></div>;
     }
 
+    return descContent;
+  },
+
+  renderTag: function (tag) {
+    return <li key={tag}>{tag}</li>;
+  },
+
+  render: function() {
+    const photo = this.props.photo;
+
     return (
-      <div className="photo-box">
-        <img src={photo.media.m} alt=" "/>
-        <a href={photo.link} target="_blank">
-          <h2>{photo.title}</h2>
-        </a>
-        by
-        <a href={'https://www.flickr.com/people/' + photo.author_id}
-          target="_blank">
-          <h3>{author}</h3>
-        </a>
-        <p dangerouslySetInnerHTML={{__html: desc}}></p>
+      <figure className="photo-box">
+        <img src={photo.media.m} alt={photo.title}/>
+
+        <figcaption>
+          <a href={photo.link} target="_blank">
+            <h2>{photo.title}</h2>
+          </a>
+
+          by {this.renderAuthor(photo.author, photo.author_id)}
+        </figcaption>
+
+        {this.renderDesc(photo.description)}
+        
         <ul> {
           photo.tags.split(' ')
-            .map((tag) => {
-              return (<li key={tag}>{tag}</li>);
-            })
+            .map(this.renderTag)
         }
         </ul>
-      </div>
+
+      </figure>
     );
   }
 });
