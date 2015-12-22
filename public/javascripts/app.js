@@ -1,4 +1,4 @@
-require('../stylesheets/style.css');
+require('../stylesheets/style.scss');
 
 const React = require('react');
 const ReactDOM = require('react-dom');
