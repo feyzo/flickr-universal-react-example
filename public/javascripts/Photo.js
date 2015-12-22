@@ -6,11 +6,28 @@ module.exports = React.createClass({
 
     let author = photo.author.split('(')[1].slice(0, -1);
 
+    let desc = 'No details';
+
+    //Group paragraphs
+    let descItems = photo.description.match(/<p>(.*?)<\/p>/gi);
+    //3rd paragraph is the description.
+    //Unfortunately flickr sends a lot of crud
+    if (descItems.length > 2) {
+      desc = descItems[2];
+    }
+
     return (
       <div className="photo-box">
         <img src={photo.media.m} alt=" "/>
-        <h2>Title</h2> by <h3>{author}</h3>
-        {photo.description}
+        <a href={photo.link} target="_blank">
+          <h2>{photo.title}</h2>
+        </a>
+        by
+        <a href={'https://www.flickr.com/people/' + photo.author_id}
+          target="_blank">
+          <h3>{author}</h3>
+        </a>
+        <p dangerouslySetInnerHTML={{__html: desc}}></p>
         <ul> {
           photo.tags.split(' ')
             .map((tag) => {
