@@ -1,15 +1,23 @@
 const React = require('react');
 
+
+
 module.exports = React.createClass({
   render: function() {
-    let photo = this.props.photo;
+    //Defined here instead of globally
+    //Becase regex is stateful
+    //http://stackoverflow.com/a/11477448/1744033
+    const regexBetweenParantheses = /\(([^)]+)\)/ig;
+    const regexBetweenParagraphs = /<p>(.*?)<\/p>/ig;
 
-    let author = photo.author.split('(')[1].slice(0, -1);
-
+    const photo = this.props.photo;
+    
+    let author = regexBetweenParantheses.exec(photo.author)[1];
+    
     let desc = 'No details';
-
     //Group paragraphs
-    let descItems = photo.description.match(/<p>(.*?)<\/p>/gi);
+    //let descItems = photo.description.match(/<p>(.*?)<\/p>/gi);
+    let descItems = regexBetweenParagraphs.exec(photo.description);
     //3rd paragraph is the description.
     //Unfortunately flickr sends a lot of crud
     if (descItems.length > 2) {
