@@ -45,9 +45,9 @@ module.exports = React.createClass({
     const photo = this.props.photo;
 
     return (
-      <figure className="photo-box pure-u-sm-1-1 pure-u-md-1-2 pure-u-lg-1-4 pure-u-xl-1-6">
+      <figure className="photo-box">
         <div className="content">
-          <img className="pure-img" src={photo.media.m} alt={photo.title}/>
+          <img src={photo.media.m} alt={photo.title}/>
 
           <figcaption>
             <h2>

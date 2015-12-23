@@ -51,7 +51,7 @@ var App = React.createClass({
     }
 
     return (
-      <div className="pure-g row">
+      <div className="row">
         {appContent}
       </div>
     );
