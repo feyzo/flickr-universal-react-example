@@ -7,7 +7,6 @@ html {
   box-sizing: inherit;
 }
 
-
 #main {
   
 }
@@ -22,7 +21,6 @@ html {
   column-gap: 0;
   column-width: 96%;
 }
-
 
 .photo-box {
   margin: 0;
@@ -53,7 +51,7 @@ html {
 }
 
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 500px) {
   .row {
     column-count: 2;
     column-gap: 2%;
@@ -61,11 +59,27 @@ html {
   }
 }
 
-@media screen and (min-width: 950px) {
+@media screen and (min-width: 700px) {
   .row {
     column-count: 3;
     column-gap: 3%;
     column-width: 30%;
+  }
+}
+
+@media screen and (min-width: 950px) {
+  .row {
+    column-count: 4;
+    column-gap: 3%;
+    column-width: 22%;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .row {
+    column-count: 5;
+    column-gap: 3%;
+    column-width: 17%;
   }
 }
 
