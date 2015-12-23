@@ -1,20 +1,32 @@
 require('../stylesheets/style.scss');
 
-const React = require('react');
-const ReactDOM = require('react-dom');
-const reqwest = require('reqwest');
+import React from 'react';
+import reqwest from 'reqwest';
 
-const Photo = require('./Photo');
+import Photo from './Photo';
 
 
 var App = React.createClass({
   getInitialState : function () {
     return {
+      tagName: undefined,
       photos: []
     };
   },
 
+  componentWillReceiveProps: function (nextProps) {
+    this.setState({
+      tagName: nextProps.params.tagName
+    });
+
+    this.fetchPhotos(nextProps.params.tagName);
+  },
+  
   componentDidMount : function () {
+    this.fetchPhotos();
+  },
+
+  fetchPhotos: function (tagName) {
     reqwest({
       method: 'GET',
       type: 'jsonp',
@@ -22,12 +34,8 @@ var App = React.createClass({
       url: 'https://api.flickr.com/services/feeds/photos_public.gne',
       data: {
         format: 'json',
-        lang: 'en-us'
-        
-        // id: '',
-        // tags: '',
-        // tagmode: '',
-
+        lang: 'en-us',
+        tags: tagName
       }
     })
     .then((res) => {
@@ -37,7 +45,7 @@ var App = React.createClass({
       });
     })
     .catch(function (err, msg) {
-      console.error('Error on flick GET', err, msg);
+      console.error('Error on flickr GET', err, msg);
     });
   },
 
@@ -51,11 +59,14 @@ var App = React.createClass({
     }
 
     return (
-      <div className="row">
-        {appContent}
+      <div>
+        <h1>Flickr Photo Stream <small>{this.state.tagName}</small></h1>
+        <div className="row">
+          {appContent}
+        </div>
       </div>
     );
   }
 });
 
-ReactDOM.render(<App />, document.querySelector('#main'));
+export default App;

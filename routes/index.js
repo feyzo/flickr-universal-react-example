@@ -3,7 +3,7 @@ const router = express.Router();
 const getFlickrImages = require('../helpers/flickr');
 
 /* GET home page. */
-router.get('/', function(req, res) {
+router.get('*', function(req, res) {
   res.renderFile('../public/index.html');
 });
 

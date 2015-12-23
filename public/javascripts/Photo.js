@@ -1,5 +1,5 @@
-const React = require('react');
-
+import React from 'react';
+import { Link } from 'react-router';
 
 
 module.exports = React.createClass({
@@ -38,7 +38,13 @@ module.exports = React.createClass({
   },
 
   renderTag: function (tag) {
-    return <li key={tag}>{tag}</li>;
+    let tagPath = `/tag/${tag}`;
+
+    return (
+      <li key={tag}>
+        <Link to={tagPath}>{tag}</Link>
+      </li>
+    );
   },
 
   render: function() {
@@ -63,6 +69,7 @@ module.exports = React.createClass({
           
           <ul> {
             photo.tags.split(' ')
+              .filter(tag => tag.length > 0)
               .map(this.renderTag)
           }
           </ul>
