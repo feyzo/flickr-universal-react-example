@@ -2,6 +2,7 @@ require('../stylesheets/style.scss');
 
 import React from 'react';
 import reqwest from 'reqwest';
+import { Link } from 'react-router';
 
 import Photo from './Photo';
 
@@ -20,6 +21,7 @@ var App = React.createClass({
     });
 
     this.fetchPhotos(nextProps.params.tagName);
+    window.scrollTo(0,0);
   },
   
   componentDidMount : function () {
@@ -60,7 +62,12 @@ var App = React.createClass({
 
     return (
       <div>
-        <h1>Flickr Photo Stream <small>{this.state.tagName}</small></h1>
+        <h1>
+          <Link to="/">Flickr Photo Stream </Link>
+          <small>
+            {this.state.tagName}
+          </small>
+        </h1>
         <div className="row">
           {appContent}
         </div>
