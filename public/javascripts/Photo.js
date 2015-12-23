@@ -45,25 +45,28 @@ module.exports = React.createClass({
     const photo = this.props.photo;
 
     return (
-      <figure className="photo-box">
-        <img src={photo.media.m} alt={photo.title}/>
+      <figure className="photo-box pure-u-sm-1-1 pure-u-md-1-2 pure-u-lg-1-4 pure-u-xl-1-6">
+        <div className="content">
+          <img className="pure-img" src={photo.media.m} alt={photo.title}/>
 
-        <figcaption>
-          <a href={photo.link} target="_blank">
-            <h2>{photo.title}</h2>
-          </a>
+          <figcaption>
+            <h2>
+            <a href={photo.link} target="_blank">
+              {photo.title || 'Photo'}
+            </a> 
 
-          by {this.renderAuthor(photo.author, photo.author_id)}
-        </figcaption>
+            &nbsp;by {this.renderAuthor(photo.author, photo.author_id)}
+            </h2>
+          </figcaption>
 
-        {this.renderDesc(photo.description)}
-        
-        <ul> {
-          photo.tags.split(' ')
-            .map(this.renderTag)
-        }
-        </ul>
-
+          {this.renderDesc(photo.description)}
+          
+          <ul> {
+            photo.tags.split(' ')
+              .map(this.renderTag)
+          }
+          </ul>
+        </div>
       </figure>
     );
   }
