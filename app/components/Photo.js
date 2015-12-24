@@ -40,7 +40,7 @@ class Photo extends Component {
     let tagPath = `/tag/${tag}`;
 
     return (
-      <li key={tag}>
+      <li key={tag} className="tag">
         <Link to={tagPath}>{tag}</Link>
       </li>
     );

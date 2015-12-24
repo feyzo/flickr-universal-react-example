@@ -63,14 +63,29 @@ class App extends Component {
   }
 
   render() {
+    let selectedTag;
+
+    if (this.state.tagName) {
+      selectedTag = (
+        <small className="tag">
+          {this.state.tagName}
+        </small>
+      );
+    }
+
     return (
       <div>
-        <h1>
-          <Link to="/">Flickr Photo Stream </Link>
-          <small>
-            {this.state.tagName}
-          </small>
+        <h1 className="title">
+          <Link to="/">
+            Flickr Photo Stream
+          </Link>
+          {selectedTag}
         </h1>
+        <div className="refresh">
+          <Link to="/">
+            {this.state.tagName ? 'go back' : 'refresh' }
+          </Link>
+        </div>
         <div className="row">
           {
             this.state.photos.map(photo => {
