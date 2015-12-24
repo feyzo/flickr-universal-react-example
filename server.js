@@ -6,10 +6,6 @@ require.extensions['.scss'] = function() {
 
 var path = require('path');
 var express = require('express');
-var webpack = require('webpack');
-var webpackMiddleware = require('webpack-dev-middleware');
-var webpackHotMiddleware = require('webpack-hot-middleware');
-var config = require('./webpack.config.js');
 var Router = require('./app/Router');
 
 const isDeveloping = process.env.NODE_ENV !== 'production';
@@ -19,6 +15,11 @@ const app = express();
 app.use(express.static(path.resolve(__dirname, 'dist')));
 
 if (isDeveloping) {
+  var webpack = require('webpack');
+  var webpackMiddleware = require('webpack-dev-middleware');
+  var webpackHotMiddleware = require('webpack-hot-middleware');
+  var config = require('./webpack.config.js');
+
   const compiler = webpack(config);
 
   app.use(webpackMiddleware(compiler, {
