@@ -5,7 +5,6 @@ import ReactDOM from 'react-dom';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { createHistory } from 'history';
 import { Router, match, RoutingContext } from 'react-router';
-import Helmet from 'react-helmet';
 import Routes from './Routes';
 import Provider from './Provider';
 import Root from './components/Root';
@@ -28,10 +27,8 @@ function renderComponentWithRoot(Component, componentProps, initialData) {
     </Provider>
   );
 
-  const head = Helmet.rewind();
-
   return '<!doctype html>\n' + renderToStaticMarkup(
-    <Root content={componentHtml} initialData={initialData} head={head} />
+    <Root content={componentHtml} initialData={initialData} />
   );
 }
 

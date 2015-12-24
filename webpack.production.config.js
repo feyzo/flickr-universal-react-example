@@ -2,23 +2,41 @@
 
 var path = require('path');
 var webpack = require('webpack');
+var del = require('del');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+
+class CleanPlugin {
+  constructor(options) {
+    this.options = options;
+  }
+
+  apply () {
+    del.sync(this.options.files);
+  }
+}
 
 module.exports = {
-  devtool: '#source-map',
   entry: [
-    'webpack-hot-middleware/client?path=/__webpack_hmr',
     path.join(__dirname, 'app/index.js')
   ],
   output: {
     path: path.join(__dirname, '/dist/'),
-    filename: 'bundle.js'
+    filename: 'bundle.min.js'
   },
   plugins: [
+    new ExtractTextPlugin('style.min.css'),
     new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin(),
+    new CleanPlugin({
+      files: ['dist/*']
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      compressor: {
+        warnings: false,
+        screw_ie8: true
+      }
+    }),
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('development')
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
     })
   ],
   module: {
@@ -28,7 +46,7 @@ module.exports = {
       include: path.join(__dirname, 'app')
     }, {
       test: /\.scss$/,
-      loaders: ['style', 'css?sourceMap', 'sass?sourceMap'],
+      loader: ExtractTextPlugin.extract('style', 'css', 'sass'),
       include: path.join(__dirname, 'app')
     },  {
       test: /\.(jpe?g|png|eot|woff|ttf|gif|svg)(\?.*)?$/i,

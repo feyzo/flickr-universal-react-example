@@ -1,5 +1,5 @@
-import React, { Component, PropTypes, Children } from 'react'
-import { isClient } from './util'
+import React, { Component, PropTypes, Children } from 'react';
+import { isClient } from './util';
 
 class Provider extends Component {
 

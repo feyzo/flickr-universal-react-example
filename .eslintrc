@@ -31,5 +31,6 @@
     },
     "plugins": [
         "react"
-    ]
+    ],
+    "parser": "babel-eslint"
 }
