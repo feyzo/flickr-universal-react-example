@@ -46,7 +46,7 @@ module.exports = {
       include: path.join(__dirname, 'app')
     }, {
       test: /\.scss$/,
-      loader: ExtractTextPlugin.extract('style', 'css', 'sass'),
+      loader: ExtractTextPlugin.extract('style', 'css!sass!autoprefixer-loader?browsers=last 2 version'),
       include: path.join(__dirname, 'app')
     },  {
       test: /\.(jpe?g|png|eot|woff|ttf|gif|svg)(\?.*)?$/i,

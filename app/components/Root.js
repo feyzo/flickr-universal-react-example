@@ -15,10 +15,16 @@ class Root extends Component {
     const isDeveloping = process.env.NODE_ENV !== 'production';
     const head = this.props.head;
 
+    let styleTag;
+
+    if (!isDeveloping) {
+      styleTag = (<link rel="stylesheet" href="/style.min.css" />);
+    }
+
     return (
       <html>
         <head>
-          
+          {styleTag}
         </head>
         <body>
           <div id='root' dangerouslySetInnerHTML={{__html: this.props.content}} />
