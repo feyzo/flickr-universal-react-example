@@ -28,7 +28,7 @@ module.exports = {
       include: path.join(__dirname, 'app')
     }, {
       test: /\.scss$/,
-      loaders: ['style', 'css?sourceMap', 'sass?sourceMap'],
+      loaders: ['style', 'css?sourceMap', 'autoprefixer-loader?browsers=last 2 version', 'sass?sourceMap'],
       include: path.join(__dirname, 'app')
     },  {
       test: /\.(jpe?g|png|eot|woff|ttf|gif|svg)(\?.*)?$/i,
