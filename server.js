@@ -6,12 +6,14 @@ require.extensions['.scss'] = function() {
 
 var path = require('path');
 var express = require('express');
+var compression = require('compression');
 var Router = require('./app/Router');
 
 const isDeveloping = process.env.NODE_ENV !== 'production';
 const port = isDeveloping ? 3000 : process.env.PORT;
 const app = express();
 
+app.use(compression());
 app.use(express.static(path.resolve(__dirname, 'dist')));
 
 if (isDeveloping) {
