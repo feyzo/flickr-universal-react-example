@@ -13,22 +13,22 @@ class App extends Component {
     getInitialData: PropTypes.func
   }
 
-  static requestState() {
-    return App.fetchPhotos();
+  static requestState(params) {
+    return App.fetchPhotos(params.tagName);
   }
 
   constructor(props, context) {
     super(props, context);
 
     if (!context.getInitialData(this)) {
-      App.requestState()
+      App.requestState(props.params.tagName)
         .then(photos => {
           this.setState({ photos: photos });
         });
     }
 
     this.state = {
-      tagName: undefined,
+      tagName: props.params.tagName,
       photos: context.getInitialData(this)
     };
   }

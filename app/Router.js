@@ -54,7 +54,7 @@ function handleRoute(res, renderProps) {
   }
 
   if (routeProps.requestState) {
-    routeProps.requestState().then(renderPage);
+    routeProps.requestState(renderProps.params).then(renderPage);
   } else {
     renderPage();
   }
