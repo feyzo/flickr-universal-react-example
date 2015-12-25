@@ -198,6 +198,13 @@ ul ol, ol ul {
   background-color: #92adce;
 }
 
+.ribbon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: 0;
+}
+
 @media screen and (min-width: 500px) {
   .row {
     column-count: 2;
