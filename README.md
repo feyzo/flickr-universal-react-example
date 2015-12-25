@@ -1,7 +1,7 @@
 # Flickr Universal React Example
 
 ## Demo
-<a href="https://flickrtest.herokuapp.com" target="_blank">https://flickrtest.herokuapp.com</a>
+[https://flickrtest.herokuapp.com](https://flickrtest.herokuapp.com)
 
 ## Install and Run
 1. Clone the repo
